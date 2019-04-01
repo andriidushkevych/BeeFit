@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class NavComponent implements OnInit {
   model: any = {};
   photoUrl: string;
+  userId: number;
 
   constructor(public authService: AuthService, private alertify: AlertifyService,
       private router: Router) { }
@@ -26,6 +27,7 @@ export class NavComponent implements OnInit {
       this.alertify.error(error);
     }, () => {
       this.router.navigate(['/members']);
+      this.userId = this.authService.decodedToken.nameid;
     });
   }
 

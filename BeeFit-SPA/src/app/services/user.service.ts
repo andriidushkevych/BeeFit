@@ -6,6 +6,7 @@ import { User } from '../models/user';
 import { PaginatedResult } from '../models/Pagination';
 import { map } from 'rxjs/operators';
 import { Message } from '../models/Message';
+import { Workout } from '../models/Workout';
 
 
 @Injectable({
@@ -111,5 +112,9 @@ export class UserService {
   markAsRead(userId: number, messageId: number) {
     this.http.post(this.baseUrl + 'users/' + userId + '/messages/' + messageId + '/read', {})
       .subscribe();
+  }
+
+  getWorkout(userId: number) {
+    return this.http.get<Workout>(this.baseUrl + 'workout/' + userId);
   }
 }

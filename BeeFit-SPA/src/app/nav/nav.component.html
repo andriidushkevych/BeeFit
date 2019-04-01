@@ -13,7 +13,7 @@
         <a class="nav-link" [routerLink]="['/messages']">Messages</a>
       </li>
       <li *appHasRole="['Member']" class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/workouts']">Workouts</a>
+        <a class="nav-link" [routerLink]="['/workout', userId ]">Workouts</a>
       </li>
       <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/admin']">Admin</a>

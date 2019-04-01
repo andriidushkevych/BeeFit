@@ -51,7 +51,7 @@ namespace BeeFit.API
         //     services.AddAutoMapper();
         //     services.AddTransient<Seed>();
         //     services.AddScoped<IAuthRepository, AuthRepository>();
-        //     services.AddScoped<IDatingRepository, DatingRepository>();
+        //     services.AddScoped<IBeeFitRepository, BeeFitRepository>();
         //     services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         //                                 .AddJwtBearer(options => {
         //                                     options.TokenValidationParameters = new TokenValidationParameters
@@ -67,7 +67,7 @@ namespace BeeFit.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             IdentityBuilder builder = services.AddIdentityCore<User>(opt => 
             {
@@ -86,8 +86,6 @@ namespace BeeFit.API
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
-                options.AddPolicy("ModeratePhoto", policy => policy.RequireRole("Admin, Moderator"));
-                options.AddPolicy("VIP", policy => policy.RequireRole("VIP"));
             });
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                                         .AddJwtBearer(options => {
@@ -116,7 +114,7 @@ namespace BeeFit.API
             Mapper.Reset();
             services.AddAutoMapper();
             services.AddTransient<Seed>();
-            services.AddScoped<IDatingRepository, DatingRepository>();            
+            services.AddScoped<IBeeFitRepository, BeeFitRepository>();            
             services.AddScoped<LogUserActivity>();    
         }
 

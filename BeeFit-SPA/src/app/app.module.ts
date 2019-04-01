@@ -37,9 +37,11 @@ import { MessagesResolver } from './resolvers/messages.resolver';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { HasRoleDirective } from './directives/hasRole.directive';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
-import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { AdminService } from './services/admin.service';
 import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
+import { WorkoutComponent } from './workout/workout.component';
+import { WorkoutManagementComponent } from './admin/workout-management/workout-management.component';
+import { WorkoutEditComponent } from './admin/workout-management/workout-edit/workout-edit.component';
 
 
 export function tokenGetter() {
@@ -62,8 +64,10 @@ export function tokenGetter() {
       PhotoEditorComponent,
       AdminPanelComponent,
       UserManagementComponent,
-      PhotoManagementComponent,
+      WorkoutManagementComponent,
       RolesModalComponent,
+      WorkoutComponent,
+      WorkoutEditComponent,
       TimeAgoPipe,
       HasRoleDirective
    ],

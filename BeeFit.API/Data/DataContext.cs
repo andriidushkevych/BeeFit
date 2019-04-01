@@ -19,13 +19,6 @@ namespace BeeFit.API.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Workout>(workout => 
-            {
-                workout.HasMany(w => w.Exercises)
-                        .WithOne(e => e.Workout)
-                        .OnDelete(DeleteBehavior.Restrict);
-            });
-
             builder.Entity<UserRole>(userRole => 
             {
                 userRole.HasKey(ur => new { ur.UserId, ur.RoleId});
@@ -63,6 +56,11 @@ namespace BeeFit.API.Data
             builder.Entity<Message>()
                     .HasOne(u => u.Recipient)
                     .WithMany(m => m.MessagesReceived)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Workout>()       
+                    .HasMany(w => w.Exercises)
+                    .WithOne(e => e.Workout)
                     .OnDelete(DeleteBehavior.Restrict);
         }
     }

@@ -60,7 +60,25 @@ namespace BeeFit.API.Data
 
                 var adminUser = new User
                 {
-                    UserName = "admin"
+                    UserName = "admin",
+                    KnownAs = "Trainer",
+                    Gender = "male",
+                    City = "Kitchener",
+                    Country = "Canada",
+                    DateOfBirth = new DateTime(1990, 08, 10),
+                    Introduction = "Trainer administrator",
+                    Created = new DateTime(2010, 10, 18),
+                    Goal = "Be fit",
+                    Photos = new List<Photo>
+                    {
+                        new Photo
+                        {
+                            Url = $"https://randomuser.me/api/portraits/men/91.jpg",
+                            IsMain = true,
+                            Description = "Magna duis consectetur sit ut commodo non eiusmod."
+                        }
+                    }
+                    
                 };
 
                 IdentityResult result = _userManager.CreateAsync(adminUser, "admin").Result;

@@ -17,10 +17,10 @@ namespace BeeFit.API.Controllers
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
-        private readonly IDatingRepository _repo;
+        private readonly IBeeFitRepository _repo;
         private readonly IMapper _mapper;
 
-        public UsersController(IDatingRepository repo, IMapper mapper)
+        public UsersController(IBeeFitRepository repo, IMapper mapper)
         {
             _mapper = mapper;
             _repo = repo;

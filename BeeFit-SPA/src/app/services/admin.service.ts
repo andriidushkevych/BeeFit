@@ -18,4 +18,8 @@ constructor(private http: HttpClient) { }
   updateUserRoles(user: User, roles: {}) {
     return this.http.post(this.baseUrl + 'editRoles/' + user.userName, roles);
   }
+
+  editWorkout(userId: number, exercises: {}) {
+    return this.http.post(environment.apiUrl + 'editWorkout/' + userId, exercises);
+  }
 }

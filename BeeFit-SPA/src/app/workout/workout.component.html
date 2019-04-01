@@ -1,0 +1,19 @@
+<div class="container">
+  <h1 class="mt-4">Hey, {{ workout.userKnownAs }}, your workout today:</h1>
+  <div class="row">
+    <table class="table mt-4">
+      <tr>
+        <th style="width: 30%">Exercise</th>
+        <th style="width: 30%">Muscle group</th>
+        <th style="width: 20%">Reps</th>
+        <th style="width: 20%">Sets</th>
+      </tr>
+      <tr *ngFor="let exercise of workout.exercises">
+        <td>{{ exercise.name }}</td>
+        <td>{{ exercise.muscleGroupName }}</td>
+        <td>{{ exercise.reps }}</td>
+        <td>{{ exercise.sets }}</td>
+      </tr>
+    </table>
+  </div>
+</div>

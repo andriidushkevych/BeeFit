@@ -68,12 +68,5 @@ namespace BeeFit.API.Controllers
 
             return Ok(await _userManager.GetRolesAsync(user));
         }
-
-        [Authorize(Policy = "ModeratePhoto")]
-        [HttpGet("photosForModeration")]
-        public IActionResult GetPhotosForModeration()
-        {
-            return Ok("Only admin or moderator can see this");
-        }
     }
 }

@@ -21,12 +21,12 @@ namespace BeeFit.API.Controllers
     [Controller]
     public class PhotosController : ControllerBase
     {
-        private readonly IDatingRepository _repository;
+        private readonly IBeeFitRepository _repository;
         private readonly IMapper _mapper;
         private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
         private Cloudinary _cloudinary;
 
-        public PhotosController(IDatingRepository repository,
+        public PhotosController(IBeeFitRepository repository,
             IMapper mapper,
             IOptions<CloudinarySettings> cloudinaryConfig)
         {

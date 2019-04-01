@@ -14,7 +14,7 @@ namespace BeeFit.API.Helpers
             var resultContext = await next();
 
             var userId = int.Parse(resultContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var repo = resultContext.HttpContext.RequestServices.GetService<IDatingRepository>();
+            var repo = resultContext.HttpContext.RequestServices.GetService<IBeeFitRepository>();
             var user = await repo.GetUser(userId);
             user.LastActive = DateTime.Now;
             await repo.SaveAll();
