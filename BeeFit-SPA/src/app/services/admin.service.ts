@@ -19,7 +19,7 @@ constructor(private http: HttpClient) { }
     return this.http.post(this.baseUrl + 'editRoles/' + user.userName, roles);
   }
 
-  editWorkout(userId: number, exercises: {}) {
-    return this.http.post(environment.apiUrl + 'editWorkout/' + userId, exercises);
+  editWorkout(user: User, exercises: {}) {
+    return this.http.post(environment.apiUrl + 'workout/editWorkout/' + user.id, exercises);
   }
 }

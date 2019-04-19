@@ -41,7 +41,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container mt-5\">\n  <h2>Admin panel</h2>\n  <div class=\"tab-panel\">\n    <tabset>\n      <tab heading=\"User management\">\n        <div class=\"container\">\n            <app-user-management></app-user-management>\n        </div>\n      </tab>\n      <tab heading=\"Workout management\">\n        <app-workout-management></app-workout-management>\n      </tab>\n    </tabset>\n  </div>\n</div>"
+module.exports = "<div class=\"container mt-5\">\n  <h2>Admin panel</h2>\n  <div class=\"tab-panel\">\n    <tabset>\n      <tab heading=\"User management\">\n        <div class=\"container\">\n            <app-user-management></app-user-management>\n        </div>\n      </tab>\n      <tab heading=\"Workout management\">\n        <div class=\"container\">\n          <app-workout-management></app-workout-management>\n        </div>\n      </tab>\n    </tabset>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -310,7 +310,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container mt-5\">\n  <div class=\"row\">\n      <div class=\"col-sm-4\">\n          <h1>Workout edit</h1>\n      </div>\n      <div class=\"col-sm-8\">\n          <div *ngIf=\"editForm.dirty\" class=\"alert alert-info\">\n              <strong>Information: </strong>Any unsaved changes will be lost!\n          </div>\n      </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-sm-4\">\n      <div class=\"card\">\n        <img class=\"card-img-top img-thumbnail\" src=\"{{ photoUrl || '../../assets/user.png'}}\" alt=\"{{ user.knownAs }}\">\n        <div class=\"card-body\">\n          <div>\n            <strong>Name:</strong>\n            <p>{{  user.knownAs }}</p>\n          </div>\n          <div>\n            <strong>Age:</strong>\n            <p>{{  user.age }}</p>\n          </div>\n          <div>\n            <strong>Gender:</strong>\n            <p>{{ user.gender }}</p>\n          </div>\n        </div>\n        <div class=\"card-footer\">\n          <button [disabled]=\"!editForm.dirty\" form=\"editForm\" class=\"btn btn-success btn-block\">Save changes</button>\n        </div>\n      </div>\n    </div>\n    <div class=\"col-sm-8\">\n      <div class=\"tab-panel\">\n        <tabset class=\"member-tabset\">\n          <tab heading=\"Edit workout\">\n              <form #editForm=\"ngForm\" id=\"editForm\" (ngSubmit)=\"updateWorkout()\">\n                <div class=\"form-inline\" *ngFor=\"let ex of workout.exercises; let i = index\">\n                  <h4 class=\"mr-4 ml-3\">{{ i + 1 }}</h4> \n                  <div class=\"row\">\n                    <div class=\"col-sm-4\">\n                      <label for=\"name\">Name:</label>\n                      <input class=\"form-control\" type=\"text\" name=\"name\" [(ngModel)]=\"ex.name\">\n                      <label for=\"sets\">Sets:</label>\n                      <input class=\"form-control\" type=\"text\" name=\"sets\" [(ngModel)]=\"ex.sets\"> \n                    </div>\n                    <div class=\"col-sm-4\">\n                      <label for=\"muscleGroup\">Muscle group:</label>\n                      <input class=\"form-control\" type=\"text\" name=\"muscleGroup\" [(ngModel)]=\"ex.muscleGroupName\">\n                      <label for=\"reps\">Reps:</label>\n                      <input class=\"form-control\" type=\"text\" name=\"reps\" [(ngModel)]=\"ex.reps\">\n                    </div>\n                  </div>\n                </div>\n              </form>            \n          </tab>\n        </tabset>\n      </div>\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container mt-5\">\n  <div class=\"row\">\n      <div class=\"col-sm-4\">\n          <h1>Workout edit</h1>\n      </div>\n      <div class=\"col-sm-8\">\n          <div *ngIf=\"editForm.dirty\" class=\"alert alert-info\">\n              <strong>Information: </strong>Any unsaved changes will be lost!\n          </div>\n      </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-sm-4\">\n      <div class=\"card\">\n        <img class=\"card-img-top img-thumbnail\" src=\"{{ photoUrl || '../../assets/user.png'}}\" alt=\"{{ user.knownAs }}\">\n        <div class=\"card-body\">\n          <div>\n            <strong>Name:</strong>\n            <p>{{  user.knownAs }}</p>\n          </div>\n          <div>\n            <strong>Age:</strong>\n            <p>{{  user.age }}</p>\n          </div>\n          <div>\n            <strong>Gender:</strong>\n            <p>{{ user.gender }}</p>\n          </div>\n        </div>\n        <div class=\"card-footer\">\n          <button [disabled]=\"!editForm.dirty\" form=\"editForm\" class=\"btn btn-success btn-block\">Save changes</button>\n        </div>\n      </div>\n    </div>\n    <div class=\"col-sm-8\">\n      <div class=\"tab-panel\">\n        <tabset class=\"member-tabset\">\n          <tab heading=\"Edit workout\">\n              <form #editForm=\"ngForm\" id=\"editForm\" (ngSubmit)=\"updateWorkout()\">\n                <div class=\"form-inline\" *ngFor=\"let ex of workout.exercises; let i = index\">\n                  <h4 class=\"mr-4 ml-3\">{{ i + 1 }}</h4> \n                  <div class=\"row\">\n                    <div class=\"col\">\n                      <label for=\"name\">Name:</label>\n                      <input class=\"form-control\" type=\"text\" name=\"name\" [(ngModel)]=\"ex.name\">\n                      <label for=\"sets\">Sets:</label>\n                      <input class=\"form-control\" type=\"number\" name=\"sets\" [(ngModel)]=\"ex.sets\"> \n                    </div>\n                    <div class=\"col\">\n                      <label for=\"muscleGroup\">Muscle group:</label>\n                      <input class=\"form-control\" type=\"text\" name=\"muscleGroup\" [(ngModel)]=\"ex.muscleGroupName\">\n                      <label for=\"reps\">Reps:</label>\n                      <input class=\"form-control\" type=\"number\" name=\"reps\" [(ngModel)]=\"ex.reps\">\n                    </div>\n                  </div>\n                </div>\n              </form>            \n          </tab>\n        </tabset>\n      </div>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -377,7 +377,8 @@ var WorkoutEditComponent = /** @class */ (function () {
     };
     WorkoutEditComponent.prototype.updateWorkout = function () {
         var _this = this;
-        this.adminService.editWorkout(this.authService.decodedToken.nameid, this.workout.exercises)
+        this.exercises = this.workout.exercises;
+        this.adminService.editWorkout(this.user, this.exercises)
             .subscribe(function (next) {
             _this.alertify.success('Updated successfully!');
             _this.editForm.reset(_this.workout);
@@ -2536,8 +2537,8 @@ var AdminService = /** @class */ (function () {
     AdminService.prototype.updateUserRoles = function (user, roles) {
         return this.http.post(this.baseUrl + 'editRoles/' + user.userName, roles);
     };
-    AdminService.prototype.editWorkout = function (userId, exercises) {
-        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].apiUrl + 'editWorkout/' + userId, exercises);
+    AdminService.prototype.editWorkout = function (user, exercises) {
+        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].apiUrl + 'workout/editWorkout/' + user.id, exercises);
     };
     AdminService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({

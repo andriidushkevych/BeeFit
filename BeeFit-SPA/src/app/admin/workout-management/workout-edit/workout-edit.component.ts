@@ -7,6 +7,7 @@ import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Workout } from 'src/app/models/Workout';
 import { AdminService } from 'src/app/services/admin.service';
+import { Exercise } from 'src/app/models/Exercise';
 
 @Component({
   selector: 'app-workout-edit',
@@ -20,6 +21,7 @@ export class WorkoutEditComponent implements OnInit {
   userId: number;
   workout: Workout;
   photoUrl: string;
+  exercises: Exercise[];
   @HostListener('window:beforeunload', ['$event'])
 
   unloadNotification($event: any) {
@@ -50,7 +52,8 @@ export class WorkoutEditComponent implements OnInit {
   }
 
   updateWorkout() {
-    this.adminService.editWorkout(this.authService.decodedToken.nameid, this.workout.exercises)
+    this.exercises = this.workout.exercises;
+    this.adminService.editWorkout(this.user, this.exercises)
         .subscribe(next => {
           this.alertify.success('Updated successfully!');
           this.editForm.reset(this.workout);
