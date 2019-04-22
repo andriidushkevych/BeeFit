@@ -42,6 +42,7 @@ import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 import { WorkoutComponent } from './workout/workout.component';
 import { WorkoutManagementComponent } from './admin/workout-management/workout-management.component';
 import { WorkoutEditComponent } from './admin/workout-management/workout-edit/workout-edit.component';
+import { WorkoutEditResolver } from './resolvers/workout-edit.resolver';
 
 
 export function tokenGetter() {
@@ -105,6 +106,7 @@ export function tokenGetter() {
       MemberEditResolver,
       ListsResolver,
       MessagesResolver,
+      WorkoutEditResolver,
       PreventUnsavedChanges
    ],
    entryComponents: [

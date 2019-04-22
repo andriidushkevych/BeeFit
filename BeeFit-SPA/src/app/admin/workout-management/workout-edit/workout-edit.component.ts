@@ -7,6 +7,8 @@ import { UserService } from 'src/app/services/user.service';
 import { Workout } from 'src/app/models/Workout';
 import { AdminService } from 'src/app/services/admin.service';
 import { Exercise } from 'src/app/models/Exercise';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-workout-edit',
@@ -37,6 +39,8 @@ export class WorkoutEditComponent implements OnInit {
 
   ngOnInit() {
     this.loadUsers();
+    this.workout = this.route.snapshot.data.workout;
+    this.exercises = this.workout.exercises;
   }
 
   loadUsers() {
@@ -44,12 +48,6 @@ export class WorkoutEditComponent implements OnInit {
     this.userService.getUser(this.userId).subscribe(res => {
       this.user = res;
       this.photoUrl = this.user.photoUrl;
-    }, error => {
-      this.alertify.error(error);
-    });
-    this.userService.getWorkout(this.userId).subscribe((res: Workout) => {
-      this.workout = res;
-      this.exercises = this.workout.exercises;
     }, error => {
       this.alertify.error(error);
     });

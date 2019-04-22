@@ -14,6 +14,7 @@ import { MessagesResolver } from './resolvers/messages.resolver';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { WorkoutComponent } from './workout/workout.component';
 import { WorkoutEditComponent } from './admin/workout-management/workout-edit/workout-edit.component';
+import { WorkoutEditResolver } from './resolvers/workout-edit.resolver';
 
 export const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -29,7 +30,7 @@ export const appRoutes: Routes = [
                     canDeactivate: [PreventUnsavedChanges]},
             {path: 'messages', component: MessagesComponent, resolve: {messages: MessagesResolver}},
             {path: 'workout/:id', component: WorkoutComponent},
-            {path: 'workout/edit/:id', component: WorkoutEditComponent},
+            {path: 'workout/edit/:id', component: WorkoutEditComponent, resolve: {workout: WorkoutEditResolver}},
             {path: 'admin', component: AdminPanelComponent, data: {roles: ['Admin', 'Moderator']}}
         ]
     },

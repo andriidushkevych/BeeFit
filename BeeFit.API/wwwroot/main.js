@@ -360,6 +360,8 @@ var WorkoutEditComponent = /** @class */ (function () {
     };
     WorkoutEditComponent.prototype.ngOnInit = function () {
         this.loadUsers();
+        this.workout = this.route.snapshot.data.workout;
+        this.exercises = this.workout.exercises;
     };
     WorkoutEditComponent.prototype.loadUsers = function () {
         var _this = this;
@@ -367,12 +369,6 @@ var WorkoutEditComponent = /** @class */ (function () {
         this.userService.getUser(this.userId).subscribe(function (res) {
             _this.user = res;
             _this.photoUrl = _this.user.photoUrl;
-        }, function (error) {
-            _this.alertify.error(error);
-        });
-        this.userService.getWorkout(this.userId).subscribe(function (res) {
-            _this.workout = res;
-            _this.exercises = _this.workout.exercises;
         }, function (error) {
             _this.alertify.error(error);
         });
@@ -633,12 +629,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _workout_workout_component__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./workout/workout.component */ "./src/app/workout/workout.component.ts");
 /* harmony import */ var _admin_workout_management_workout_management_component__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./admin/workout-management/workout-management.component */ "./src/app/admin/workout-management/workout-management.component.ts");
 /* harmony import */ var _admin_workout_management_workout_edit_workout_edit_component__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./admin/workout-management/workout-edit/workout-edit.component */ "./src/app/admin/workout-management/workout-edit/workout-edit.component.ts");
+/* harmony import */ var _resolvers_workout_edit_resolver__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./resolvers/workout-edit.resolver */ "./src/app/resolvers/workout-edit.resolver.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -746,6 +744,7 @@ var AppModule = /** @class */ (function () {
                 _resolvers_member_edit_resolver__WEBPACK_IMPORTED_MODULE_30__["MemberEditResolver"],
                 _resolvers_lists_resolver__WEBPACK_IMPORTED_MODULE_33__["ListsResolver"],
                 _resolvers_messages_resolver__WEBPACK_IMPORTED_MODULE_34__["MessagesResolver"],
+                _resolvers_workout_edit_resolver__WEBPACK_IMPORTED_MODULE_43__["WorkoutEditResolver"],
                 _guards_prevent_unsaved_changes_guard__WEBPACK_IMPORTED_MODULE_31__["PreventUnsavedChanges"]
             ],
             entryComponents: [
@@ -2440,6 +2439,47 @@ var MessagesResolver = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/resolvers/workout-edit.resolver.ts":
+/*!****************************************************!*\
+  !*** ./src/app/resolvers/workout-edit.resolver.ts ***!
+  \****************************************************/
+/*! exports provided: WorkoutEditResolver */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WorkoutEditResolver", function() { return WorkoutEditResolver; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/user.service */ "./src/app/services/user.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var WorkoutEditResolver = /** @class */ (function () {
+    function WorkoutEditResolver(userService) {
+        this.userService = userService;
+    }
+    WorkoutEditResolver.prototype.resolve = function (route) {
+        return this.userService.getWorkout(route.params['id']);
+    };
+    WorkoutEditResolver = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+        __metadata("design:paramtypes", [_services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"]])
+    ], WorkoutEditResolver);
+    return WorkoutEditResolver;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/routes.ts":
 /*!***************************!*\
   !*** ./src/app/routes.ts ***!
@@ -2464,6 +2504,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin_admin_panel_admin_panel_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./admin/admin-panel/admin-panel.component */ "./src/app/admin/admin-panel/admin-panel.component.ts");
 /* harmony import */ var _workout_workout_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./workout/workout.component */ "./src/app/workout/workout.component.ts");
 /* harmony import */ var _admin_workout_management_workout_edit_workout_edit_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./admin/workout-management/workout-edit/workout-edit.component */ "./src/app/admin/workout-management/workout-edit/workout-edit.component.ts");
+/* harmony import */ var _resolvers_workout_edit_resolver__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./resolvers/workout-edit.resolver */ "./src/app/resolvers/workout-edit.resolver.ts");
+
 
 
 
@@ -2492,7 +2534,7 @@ var appRoutes = [
                 canDeactivate: [_guards_prevent_unsaved_changes_guard__WEBPACK_IMPORTED_MODULE_9__["PreventUnsavedChanges"]] },
             { path: 'messages', component: _messages_messages_component__WEBPACK_IMPORTED_MODULE_2__["MessagesComponent"], resolve: { messages: _resolvers_messages_resolver__WEBPACK_IMPORTED_MODULE_10__["MessagesResolver"] } },
             { path: 'workout/:id', component: _workout_workout_component__WEBPACK_IMPORTED_MODULE_12__["WorkoutComponent"] },
-            { path: 'workout/edit/:id', component: _admin_workout_management_workout_edit_workout_edit_component__WEBPACK_IMPORTED_MODULE_13__["WorkoutEditComponent"] },
+            { path: 'workout/edit/:id', component: _admin_workout_management_workout_edit_workout_edit_component__WEBPACK_IMPORTED_MODULE_13__["WorkoutEditComponent"], resolve: { workout: _resolvers_workout_edit_resolver__WEBPACK_IMPORTED_MODULE_14__["WorkoutEditResolver"] } },
             { path: 'admin', component: _admin_admin_panel_admin_panel_component__WEBPACK_IMPORTED_MODULE_11__["AdminPanelComponent"], data: { roles: ['Admin', 'Moderator'] } }
         ]
     },

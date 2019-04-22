@@ -4,6 +4,7 @@ import { AdminService } from 'src/app/services/admin.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { UserService } from 'src/app/services/user.service';
+import { Workout } from 'src/app/models/Workout';
 
 @Component({
   selector: 'app-workout-management',
@@ -28,10 +29,4 @@ export class WorkoutManagementComponent implements OnInit {
       this.alertify.error(error);
     });
   }
-
-  // editWorkout(user) {
-  //   this.userService.getWorkout(user.id).subscribe(res => {
-  //     this.workout = res;
-  //   });
-  // }
 }
