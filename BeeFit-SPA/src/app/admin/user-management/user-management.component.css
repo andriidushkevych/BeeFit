@@ -1,0 +1,13 @@
+table {
+    margin-top: 15px;
+}
+
+img {
+    max-height: 50px;
+    border: 2px solid white;
+    display: inline;
+}
+
+td {
+    vertical-align: middle;
+}

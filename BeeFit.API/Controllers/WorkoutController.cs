@@ -60,7 +60,7 @@ namespace BeeFit.API.Controllers
 
         [Authorize(Policy = "RequireAdminRole")]
         [HttpPost("editWorkout/{userId}")]
-        public async Task<IActionResult> EditWorkout(int userId, List<ExerciseDTO> exercises)
+        public async Task<IActionResult> EditWorkout(int userId, [FromBody]List<ExerciseDTO> exercises)
         {
             var user = await _repo.GetUser(userId);
             var workout = await _repo.GetWorkout(user.Id);
@@ -89,7 +89,8 @@ namespace BeeFit.API.Controllers
                 });
             }
             await _repo.SaveAll();
-            return Ok(await _repo.GetWorkout(user.Id));
+            var newWorkout = await _repo.GetWorkout(user.Id);
+            return Ok(newWorkout);
         }
     }
 }

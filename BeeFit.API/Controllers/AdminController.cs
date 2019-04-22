@@ -36,6 +36,7 @@ namespace BeeFit.API.Controllers
                                   {
                                       Id = user.Id,
                                       UserName = user.UserName,
+                                      PhotoUrl = user.Photos.FirstOrDefault(u => u.IsMain).Url,
                                       Roles = (from userRole in user.UserRoles
                                                join role in _context.Roles
                                                on userRole.RoleId

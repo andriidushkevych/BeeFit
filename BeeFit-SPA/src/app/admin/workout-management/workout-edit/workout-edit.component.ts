@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { User } from 'src/app/models/user';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { UserService } from 'src/app/services/user.service';
-import { AuthService } from 'src/app/services/auth.service';
 import { Workout } from 'src/app/models/Workout';
 import { AdminService } from 'src/app/services/admin.service';
 import { Exercise } from 'src/app/models/Exercise';
@@ -31,10 +30,10 @@ export class WorkoutEditComponent implements OnInit {
   }
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private alertify: AlertifyService,
               private adminService: AdminService,
-              private userService: UserService,
-              private authService: AuthService) { }
+              private userService: UserService) { }
 
   ngOnInit() {
     this.userId = this.route.snapshot.params['id'];
@@ -46,17 +45,17 @@ export class WorkoutEditComponent implements OnInit {
     });
     this.userService.getWorkout(this.userId).subscribe(res => {
       this.workout = res;
+      this.exercises = this.workout.exercises;
     }, error => {
       this.alertify.error(error);
     });
   }
 
   updateWorkout() {
-    this.exercises = this.workout.exercises;
     this.adminService.editWorkout(this.user, this.exercises)
         .subscribe(next => {
           this.alertify.success('Updated successfully!');
-          this.editForm.reset(this.workout);
+          this.router.navigate(['members', this.userId]);
         }, error => {
           this.alertify.error(error);
         });

@@ -61,7 +61,7 @@ namespace BeeFit.API.Data
             builder.Entity<Workout>()       
                     .HasMany(w => w.Exercises)
                     .WithOne(e => e.Workout)
-                    .OnDelete(DeleteBehavior.Restrict);
+                    .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
