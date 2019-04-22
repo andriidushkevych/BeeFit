@@ -36,6 +36,10 @@ export class WorkoutEditComponent implements OnInit {
               private userService: UserService) { }
 
   ngOnInit() {
+    this.loadUsers();
+  }
+
+  loadUsers() {
     this.userId = this.route.snapshot.params['id'];
     this.userService.getUser(this.userId).subscribe(res => {
       this.user = res;
@@ -43,7 +47,7 @@ export class WorkoutEditComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
-    this.userService.getWorkout(this.userId).subscribe(res => {
+    this.userService.getWorkout(this.userId).subscribe((res: Workout) => {
       this.workout = res;
       this.exercises = this.workout.exercises;
     }, error => {
